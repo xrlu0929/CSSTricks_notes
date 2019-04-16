@@ -1,0 +1,28 @@
+<view class='up_down' catchtap='hide_disclaimer'>
+   <view id='{{hide_disclaimer?"arrow_down":"arrow_up"}}' ></view>
+</view>
+
+
+#arrow_up{
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg); 
+
+  border: solid #6B6B6B;
+  border-width: 0 3rpx 3rpx 0;
+  width: 25rpx;
+  height: 25rpx;
+  margin: 30rpx 15rpx 5rpx 20rpx;
+  display: inline-block;
+}
+
+#arrow_down{
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg); 
+
+  border: solid #6B6B6B;
+  border-width: 0 3rpx 3rpx 0;
+  width: 25rpx;
+  height: 25rpx;
+  margin: 7rpx 15rpx 5rpx 20rpx;
+  display: inline-block;
+}
