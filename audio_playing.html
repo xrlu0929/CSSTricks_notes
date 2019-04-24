@@ -16,17 +16,41 @@
             margin: 50px auto;
             /*background-color: grey;*/
         }
+        /*to compile ios*/
+        .hidden_up{
+          position: absolute;
+          width: 30px;
+          height: 20px;
+          /*background-color: green;*/
+          background-color: #ffffff;
+          top: 50px;
+          left: 20px;
+        }
+        .hidden_down{
+          position: absolute;
+          top: 20px;
+          left: 50px;
+          width: 20px;
+          height: 30px;
+          /*background-color: pink;*/
+          background-color: #ffffff;
+        }
+
+
         .wifi-symbol {
             width: 50px;
             height: 50px;
             box-sizing: border-box;
-            overflow: hidden;
+            /*overflow: hidden;*/
+            /*ios does not support*/
             transform: rotate(135deg);
             /*background-color: yellow;*/
 
         }
         .wifi-circle {
-            border: 5px solid #94c6dc;
+            /*to compile ios*/
+            border-top: 5px solid #94c6dc;
+            border-left: 5px solid #94c6dc;
             border-radius: 50%;
             position: absolute;
         }
@@ -63,14 +87,18 @@
                 opacity: 1; /*结尾状态 透明度为1*/
             }
         }
+
+
     </style>
 </head>
 <body>
     <div class="box">
         <div class="wifi-symbol">
-            <div class="wifi-circle first"></div>
+            <!-- <div class="wifi-circle first"></div> -->
             <div class="wifi-circle second"></div>
             <div class="wifi-circle third"></div>
+            <div class='hidden_down'></div>
+            <div class='hidden_up'></div>
         </div>
     </div>
 </body>

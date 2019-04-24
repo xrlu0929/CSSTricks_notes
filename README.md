@@ -2,6 +2,7 @@
 
 1. [audio play](/audio_playing.html)
   * *the thing looks like playing status in wechat audio bar* <br>
+     <p>04242019 updated: overflow:hidden is not supported in ios/safari </p>
   <img src="/img/audio_playing.gif"
      alt="audio play"
      style="float: left; margin-right: 10px;width:40px;height:40px;" />
