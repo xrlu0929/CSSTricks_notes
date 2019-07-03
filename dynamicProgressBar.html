@@ -2,6 +2,11 @@
 <html>
 <head>
 <style> 
+#sample{
+	width: 800px;
+	height: 20px;
+	background-color: yellow;
+}
 .animation {
   width: 100px;
   height: 10px;
@@ -19,13 +24,13 @@
 /* Safari 4.0 - 8.0 */
 @-webkit-keyframes example {
   from {width: 0;}
-  to {width: 100px;}
+  to {width: 800px;}
 }
 
 /* Standard syntax */
 @keyframes example {
   from {width: 0;}
-  to {width: 100px;}
+  to {width: 800px;}
 }
 </style>
 </head>
@@ -33,41 +38,49 @@
 
 <p><b>Note:</b> This example does not work in Internet Explorer 9 and earlier versions.</p>
 
-<div id='sample'></div>
+<div id='sample' class="still"></div>
 
 <br>
 
-<button id='button' onclick='control()'>PLAY</button>
+<button id='button' onclick="control()">PAUSE</button>
 
 <p><b>Note:</b> When an animation is finished, it changes back to its original style.</p>
 
 </body>
+
 <script>
 
-let paused = true
+let paused = true;
+let progress = 0;
 
 function control() {
   
-  var progress = 0;
   var status = document.getElementById("button").innerText;
   console.log("status: ", status)
-  if (status == "PAUSE") {
+
+  if (status == "PAUSE" ) {
     // after click -- play
     document.getElementById("button").innerHTML = "PLAY"
     paused = false;
-    progress = document.getElementById("sample").offsetWidth;
-    console.log("paused: ",progress);
-
-    document.getElementById("sample").className = "still";
-    document.getElementById('sample').css.animation-play-state = paused;
-  } else {
-    // onclick text is play
-    // pause it
-    paused = true;
     document.getElementById("sample").className = "animation";
+    
+    // progress = document.getElementsByClassName("animation")[0].offsetWidth;
+    document.getElementById("sample").style.webkitAnimationPlayState = "running";
+    console.log("after click is play: ",progress);
 
     
-    console.log("play: ", progress);
+  } else {
+    // onclick text is play
+    
+    // pause it
+    paused = true;
+    
+    document.getElementById("sample").className = "still";
+
+    document.getElementsByClassName('still')[0].style.width = progress + "px";
+
+    document.getElementById("sample").style.webkitAnimationPlayState = "pause";
+    console.log("after click is pause: ", progress);
 
     document.getElementById("button").innerHTML = "PAUSE"
   }
