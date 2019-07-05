@@ -3,34 +3,49 @@
 <head>
 <style> 
 #sample{
-	width: 800px;
+	width: 60px;
 	height: 20px;
 	background-color: yellow;
+	padding-top: 10px;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
 }
 .animation {
-  width: 100px;
+  margin-left: 0px;
+  width: 0px;
   height: 10px;
   background-color: red;
-  -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
-  -webkit-animation-duration: 60s; /* Safari 4.0 - 8.0 */
-  animation-name: example;
-  animation-duration: 60s;
+  /*speed control*/
+  -webkit-transition: width 60s linear;
+  -moz-transition: width 60s linear;
+  -ms-transition: width 60s linear;
+  -o-transition: width 60s linear;
+  transition: width 60s linear;
 }
+
 .still {
-  height: 10px;
+  width: 0px; 
+  height: 0px;
   background-color: red;
 }
 
+.supplement{
+  position: absolute;
+  width: 0px;
+  height: 10px;
+  background-color: red;
+}
 /* Safari 4.0 - 8.0 */
 @-webkit-keyframes example {
   from {width: 0;}
-  to {width: 800px;}
+  to {width: 60px;}
 }
 
 /* Standard syntax */
 @keyframes example {
   from {width: 0;}
-  to {width: 800px;}
+  to {width: 60px;}
 }
 </style>
 </head>
@@ -38,51 +53,60 @@
 
 <p><b>Note:</b> This example does not work in Internet Explorer 9 and earlier versions.</p>
 
-<div id='sample' class="still"></div>
+<div id='sample'>
+	<div class="supplement"></div>
+	<div class="still"></div>
+</div>
 
 <br>
 
-<button id='button' onclick="control()">PAUSE</button>
-
-<p><b>Note:</b> When an animation is finished, it changes back to its original style.</p>
+<button id='button' onclick="control()">PAUSED</button>
 
 </body>
+
+<p><b>Note:</b> When an animation is finished, it changes back to its original style.</p>
 
 <script>
 
 let paused = true;
 let progress = 0;
 
+let marginLeft = 0;
+
 function control() {
   
   var status = document.getElementById("button").innerText;
   console.log("status: ", status)
 
-  if (status == "PAUSE" ) {
+  if (status == "PAUSED" ) {
     // after click -- play
-    document.getElementById("button").innerHTML = "PLAY"
+    document.getElementById("button").innerHTML = "PLAYING"
     paused = false;
-    document.getElementById("sample").className = "animation";
-    
-    // progress = document.getElementsByClassName("animation")[0].offsetWidth;
-    document.getElementById("sample").style.webkitAnimationPlayState = "running";
-    console.log("after click is play: ",progress);
+    // progress = document.getElementsByClassName('supplement')[0].style.width;
+    console.log('progress: ', progress)
+    console.log('progress float: ', parseFloat(progress));
 
+    document.getElementsByClassName('still')[0].className= "animation";
+    document.getElementsByClassName('animation')[0].style.width= '60px';
+    document.getElementsByClassName('animation')[0].style.marginLeft= progress;
+     console.log("after click is play: ",progress);
     
   } else {
     // onclick text is play
     
     // pause it
     paused = true;
+    let bar = document.getElementsByClassName('animation')[0]
+    progress = window.getComputedStyle(bar).getPropertyValue('width');
+    document.getElementsByClassName('supplement')[0].style.width = progress;
+
+    document.getElementsByClassName('animation')[0].className = "still";
+    document.getElementsByClassName('still')[0].style.width = 0;
     
-    document.getElementById("sample").className = "still";
 
-    document.getElementsByClassName('still')[0].style.width = progress + "px";
-
-    document.getElementById("sample").style.webkitAnimationPlayState = "pause";
     console.log("after click is pause: ", progress);
 
-    document.getElementById("button").innerHTML = "PAUSE"
+    document.getElementById("button").innerHTML = "PAUSED"
   }
 } 
 
